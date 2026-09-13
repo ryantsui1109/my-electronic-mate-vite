@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { app, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage, safeStorage } from 'electron'
 import * as path from 'path'
 import { fileURLToPath } from 'node:url'
@@ -5,7 +6,10 @@ import Store from 'electron-store'
 import menu from './menu.js'
 import OpenAI from 'openai'
 import createPrompt from './prompt.js'
+
+// eslint-disable-next-line no-unused-vars
 import takatoIconPath from './assets/saijo_takato_head.png?asset'
+import mateconfig from './mateConfig.js'
 
 const configStore = new Store({
   defaults: {
@@ -183,41 +187,34 @@ ipcMain.handle('send-dialogue', async (e, prompt) => {
   return 0
 })
 
+// eslint-disable-next-line no-unused-vars
 const startMate = ({ winMate }) => {
-  winMate.webContents.openDevTools({ mode: 'detach' })
-
-  winMate.loadFile(path.join(__dirname, '..', 'renderer', 'mate-index.html'))
-  winMate.setAlwaysOnTop(true, 'screen-saver')
+  // 自己寫哦 <(￣︶￣)↗[GO!]
 }
 
 app.whenReady().then(() => {
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width, height } = primaryDisplay.workAreaSize
-  const trayIcon = nativeImage.createFromPath(takatoIconPath).resize({ width: 22, height: 22 })
-  const tray = new Tray(trayIcon)
+  //社課：構建托盤
 
-  const winMate = new BrowserWindow({
-    width: 200,
-    height: 300,
-    frame: false,
-    x: width - 300,
-    y: height - 350,
-    transparent: true,
-    type: 'toolbar',
-    alwaysOnTop: true,
-    webPreferences: {
-      preload: path.join(__dirname, '../preload/index.js')
-    }
-  })
+  // 社課：menu用於構建選單選項
+  // 社課：需要填寫 menu.js
+  // eslint-disable-next-line no-unused-vars
   const contextMenu = Menu.buildFromTemplate(menu)
-  tray.setToolTip('MEM by ryantsui')
-  tray.setContextMenu(contextMenu)
+
+  // 社課：這是桌寵視窗設定檔
+  // 社課：需要填寫 mateconfig.js
+  const winMate = new BrowserWindow(
+    mateconfig(width, height, path.join(__dirname, '../preload/index.js'))
+  )
 
   if (process.platform === 'darwin') {
     const appMenu = Menu.buildFromTemplate([{ label: app.name, submenu: menu }])
     Menu.setApplicationMenu(appMenu)
   }
 
+  // 社課：startMate函數用於啓動浮動桌寵
+  // 社課：完成 startMate函數
   startMate({ winMate })
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) startMate({ winMate })

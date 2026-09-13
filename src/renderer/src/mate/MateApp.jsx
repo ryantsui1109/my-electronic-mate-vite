@@ -10,29 +10,28 @@ import { useState, useRef, useEffect } from 'react'
 
 function MateApp() {
   const [isHovered, setIsHovered] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [isFocused, setIsFocused] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [showThinking, setShowThinking] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [showResponse, setShowResponse] = useState(false)
   const [showDragHandle, setShowDragHandle] = useState(false)
-  const [aiResponse, setAiResponse] = useState('')
+  // 社課：建立AI回覆state
+  // eslint-disable-next-line no-unused-vars
   const inputRef = useRef(null)
   const timerRef = useRef(null)
 
   const showDialog = isHovered || isFocused
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     function handleResult(res) {
-      setShowThinking(true)
-      setAiResponse((prev) => prev + res)
+      // 社課：完成接收到AI回覆時的行爲
     }
 
     function handleDialogueEnd() {
-      setShowThinking(false)
-
-      setTimeout(() => {
-        setAiResponse('')
-        setShowResponse(false)
-      }, 6000)
+      // 社課：完成接收到AI回覆時的行爲
     }
 
     window.api.handle('dialogue-result', handleResult)
@@ -51,15 +50,9 @@ function MateApp() {
     }, 3000)
   }
 
+  // eslint-disable-next-line no-unused-vars
   function handleSubmit(e) {
-    setShowResponse(true)
-    setShowThinking(true)
-    e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    window.dialogue.send(fd.get('prompt'))
-    inputRef.current.value = ''
-    inputRef.current.blur()
-    setIsFocused(false)
+    // 社課：提交行爲
   }
 
   return (
@@ -97,8 +90,7 @@ function MateApp() {
                 variant="secondary"
               />
             )}
-
-            {aiResponse}
+            {/* 社課：建立AI回覆state，並填在這裏 */}
           </div>
         )}
         <div
@@ -121,19 +113,7 @@ function MateApp() {
           className={cn('position-absolute', 'bottom-0', 'start-0', 'w-100', 'p-2', 'z-3')}
         >
           <Form onSubmit={handleSubmit} className="bg-white p-1 rounded shadow-sm">
-            <Form.Control
-              ref={inputRef}
-              size="sm"
-              type="text"
-              name="prompt"
-              placeholder="與桌寵對話"
-              autoComplete="off"
-              onFocus={() => {
-                setIsFocused(true)
-                showHandle()
-              }}
-              onBlur={() => setIsFocused(false)}
-            />
+            {/* 社課：完成文字輸入框與邏輯 */}
           </Form>
         </div>
       </div>
