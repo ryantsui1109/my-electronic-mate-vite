@@ -1,0 +1,30 @@
+#root {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#app-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+  width: 100%;
+}
+
+#winCtrl-bar {
+  -webkit-app-region: drag;
+  height: 32px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+#close-btn,
+#max-btn,
+#min-btn {
+  -webkit-app-region: no-drag;
+}
