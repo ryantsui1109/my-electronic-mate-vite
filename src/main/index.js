@@ -32,30 +32,7 @@ const historyStore = new Store({
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-ipcMain.on('close-window', (e) => {
-  const webContent = e.sender
-  const win = BrowserWindow.fromWebContents(webContent)
-  win.close()
-})
-ipcMain.on('maximize-window', (e) => {
-  const webContent = e.sender
-  const win = BrowserWindow.fromWebContents(webContent)
-  if (win.isMaximized()) {
-    win.unmaximize()
-  } else {
-    win.maximize()
-  }
-})
-ipcMain.on('minimize-window', (e) => {
-  const webContent = e.sender
-  const win = BrowserWindow.fromWebContents(webContent)
-  win.minimize()
-})
-ipcMain.on('resize', (e) => {
-  const webContent = e.sender
-  const win = BrowserWindow.fromWebContents(webContent)
-  win.setSize(800, 600)
-})
+// 社課：maximize、minimize、close、resize window
 
 ipcMain.handle('history-store-get', async (event, key) => {
   return historyStore.get(key)
@@ -79,26 +56,12 @@ ipcMain.handle('app-config-get', async () => {
 })
 
 async function readConfig() {
-  const appConfig = configStore.get('appConfig', {})
-  const encryptedApiKey = appConfig.encryptedApiKey || null
-  const decryptResult = encryptedApiKey
-    ? await safeStorage.decryptStringAsync(Buffer.from(encryptedApiKey.data))
-    : ''
-  appConfig['apiKey'] = decryptResult.result
-  delete appConfig.encryptedApiKey
-  if (decryptResult.shouldReEncrypt) {
-    writeConfig(appConfig)
-  }
+  // 社課：讀取設定、解密API Key邏輯
   return appConfig
 }
 
 async function writeConfig(config) {
-  console.log(':', Object.keys(safeStorage))
-  const encryptedApiKey = await safeStorage.encryptStringAsync(config.apiKey)
-  const appConfig = Object.assign({}, config)
-  delete appConfig.apiKey
-  appConfig['encryptedApiKey'] = encryptedApiKey
-  configStore.set('appConfig', appConfig)
+  // 社課：加密API Key、寫入設定
 }
 
 ipcMain.handle('app-config-set', async (event, val) => {
