@@ -31,13 +31,7 @@ function AppConfig() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-
-    const fdObject = Object.fromEntries(fd.entries())
-
-    window.appConfig.set(fdObject)
-    getAvailableModels()
+    // 社課：完成提交行爲
   }
 
   function handleTogglePassword() {
@@ -47,10 +41,7 @@ function AppConfig() {
     <>
       <div>
         <Form ref={formRef} id="app-config" onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicBaseURL">
-            <Form.Label>Base URL</Form.Label>
-            <Form.Control placeholder="請填寫 API 網址" name="baseURL" />
-          </Form.Group>
+          {/* 社課：製作Base URL輸入框 */}
           <Form.Group className="mb-3" controlId="formBasicApiKey">
             <Form.Label>API key</Form.Label>
             <InputGroup>
@@ -104,18 +95,10 @@ function AppConfig() {
               </DropdownButton>
             </InputGroup>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicMaxToken">
-            <Form.Label>最大 token 數量</Form.Label>
-            <Form.Control placeholder="請填寫最大 token 數" name="maxToken" />
-            <Form.Text>超過此上限的對話記錄將被自動裁剪</Form.Text>
-          </Form.Group>
+          {/* 社課：製作Max token輸入框 */}
         </Form>
       </div>
-      <div className="d-flex justify-content-end">
-        <Button type="submit" form="app-config">
-          儲存
-        </Button>
-      </div>
+      {/* 社課：靠右排版，提交按鈕 */}
     </>
   )
 }
