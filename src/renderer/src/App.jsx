@@ -11,9 +11,7 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react'
 function App() {
   return (
     <>
-      <div id="winCtrl-bar" className={cn('d-flex', 'flex-row-reverse')}>
-        <WinCtrlBar></WinCtrlBar>
-      </div>
+      <WinCtrlBar></WinCtrlBar>
       <OverlayScrollbarsComponent id="app-body">
         <Container className="w-100">
           <ConfigTabs />
