@@ -9,7 +9,6 @@ import createPrompt from './prompt.js'
 
 // eslint-disable-next-line no-unused-vars
 import takatoIconPath from './assets/saijo_takato_head.png?asset'
-import mateconfig from './mateConfig.js'
 
 const configStore = new Store({
   defaults: {
@@ -167,9 +166,7 @@ app.whenReady().then(() => {
 
   // 社課：這是桌寵視窗設定檔
   // 社課：需要填寫 mateconfig.js
-  const winMate = new BrowserWindow(
-    mateconfig(width, height, path.join(__dirname, '../preload/index.js'))
-  )
+  
 
   if (process.platform === 'darwin') {
     const appMenu = Menu.buildFromTemplate([{ label: app.name, submenu: menu }])
