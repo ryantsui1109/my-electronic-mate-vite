@@ -150,9 +150,6 @@ ipcMain.handle('send-dialogue', async (e, prompt) => {
 })
 
 // eslint-disable-next-line no-unused-vars
-const startMate = ({ winMate }) => {
-  // 自己寫哦 <(￣︶￣)↗[GO!]
-}
 
 app.whenReady().then(() => {
   const primaryDisplay = screen.getPrimaryDisplay()
@@ -165,17 +162,13 @@ app.whenReady().then(() => {
   const contextMenu = Menu.buildFromTemplate(menu)
 
   // 社課：這是桌寵視窗設定檔
-  // 社課：需要填寫 mateconfig.js
-  
 
   if (process.platform === 'darwin') {
     const appMenu = Menu.buildFromTemplate([{ label: app.name, submenu: menu }])
     Menu.setApplicationMenu(appMenu)
   }
 
-  // 社課：startMate函數用於啓動浮動桌寵
-  // 社課：完成 startMate函數
-  startMate({ winMate })
+  // 社課：加載桌寵
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) startMate({ winMate })
   })
