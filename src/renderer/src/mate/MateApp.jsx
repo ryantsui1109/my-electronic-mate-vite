@@ -27,11 +27,11 @@ function MateApp() {
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     function handleResult(res) {
-      // 社課：完成接收到AI回覆時的行爲
+      // 社課：接收到AI回覆時的行爲
     }
 
     function handleDialogueEnd() {
-      // 社課：完成接收到AI回覆時的行爲
+      // 社課：AI回覆完成
     }
 
     window.api.handle('dialogue-result', handleResult)
