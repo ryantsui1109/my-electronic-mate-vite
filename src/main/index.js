@@ -190,11 +190,13 @@ const startMate = ({ winMate }) => {
   winMate.setAlwaysOnTop(true, 'screen-saver')
 }
 
+const tray = null
+
 app.whenReady().then(() => {
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width, height } = primaryDisplay.workAreaSize
   const trayIcon = nativeImage.createFromPath(takatoIconPath).resize({ width: 22, height: 22 })
-  const tray = new Tray(trayIcon)
+  tray = new Tray(trayIcon)
 
   const winMate = new BrowserWindow({
     width: 200,
