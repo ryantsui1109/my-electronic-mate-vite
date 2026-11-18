@@ -17,7 +17,9 @@
 }
 
 #winCtrl-bar {
-  -webkit-app-region: drag;
+  /* 社課 #7：設定User Drag屬性 */
+
+  /* 下面不用自己寫 */
   height: 32px;
   width: 100%;
   flex-shrink: 0;

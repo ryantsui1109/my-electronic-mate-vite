@@ -2,7 +2,7 @@ import classNames from 'classnames'
 function WinCtrlBar() {
   return (
     <>
-      <div id="winCtrl-bar" className={cn('d-flex', 'flex-row-reverse')}>
+      <div id="winCtrl-bar" className={classNames('d-flex', 'flex-row-reverse')}>
         <button
           id="close-btn"
           className="winCtrl-btn border-0"
@@ -10,12 +10,9 @@ function WinCtrlBar() {
         >
           <i className="bi bi-x-lg" />
         </button>
-        <button
-          id="max-btn"
-          className="winCtrl-btn border-0"
-          onClick={() => window.api.send('maximize-window')}
-        >
+        <button id="max-btn" className="winCtrl-btn border-0">
           <i className="bi bi-app" />
+          {/* 社課 #8：視窗控制 */}
         </button>
         <button
           id="min-btn"

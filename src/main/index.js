@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { app, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage, safeStorage } from 'electron'
 import * as path from 'path'
 import { fileURLToPath } from 'node:url'
@@ -5,6 +6,7 @@ import Store from 'electron-store'
 import menu from './menu.js'
 import OpenAI from 'openai'
 import createPrompt from './prompt.js'
+// eslint-disable-next-line no-unused-vars
 import takatoIconPath from './assets/saijo_takato_head.png?asset'
 
 const configStore = new Store({
@@ -33,15 +35,7 @@ ipcMain.on('close-window', (e) => {
   const win = BrowserWindow.fromWebContents(webContent)
   win.close()
 })
-ipcMain.on('maximize-window', (e) => {
-  const webContent = e.sender
-  const win = BrowserWindow.fromWebContents(webContent)
-  if (win.isMaximized()) {
-    win.unmaximize()
-  } else {
-    win.maximize()
-  }
-})
+// 社課 #8：視窗控制
 ipcMain.on('minimize-window', (e) => {
   const webContent = e.sender
   const win = BrowserWindow.fromWebContents(webContent)
@@ -194,34 +188,31 @@ const tray = null
 
 app.whenReady().then(() => {
   const primaryDisplay = screen.getPrimaryDisplay()
+  // eslint-disable-next-line no-unused-vars
   const { width, height } = primaryDisplay.workAreaSize
-  const trayIcon = nativeImage.createFromPath(takatoIconPath).resize({ width: 22, height: 22 })
-  tray = new Tray(trayIcon)
 
-  const winMate = new BrowserWindow({
-    width: 200,
-    height: 300,
-    frame: false,
-    x: width - 300,
-    y: height - 350,
-    transparent: true,
-    type: 'toolbar',
-    alwaysOnTop: true,
-    webPreferences: {
-      preload: path.join(__dirname, '../preload/index.js')
-    }
-  })
+  // eslint-disable-next-line no-unused-vars
   const contextMenu = Menu.buildFromTemplate(menu)
-  tray.setToolTip('MEM by ryantsui')
-  tray.setContextMenu(contextMenu)
+
+  // 社課 #1：構建托盤
 
   if (process.platform === 'darwin') {
     const appMenu = Menu.buildFromTemplate([{ label: app.name, submenu: menu }])
     Menu.setApplicationMenu(appMenu)
   }
 
+  // 社課 #3：桌寵視窗
+  const winMate = new BrowserWindow({
+    // 在這裡填入視窗設定（下面不用自己寫！）
+    webPreferences: {
+      preload: path.join(__dirname, '../preload/index.js')
+    }
+  })
+
   startMate({ winMate })
+
   app.on('activate', () => {
+    // eslint-disable-next-line no-undef
     if (BrowserWindow.getAllWindows().length === 0) startMate({ winMate })
   })
 })

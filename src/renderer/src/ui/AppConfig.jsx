@@ -112,9 +112,7 @@ function AppConfig() {
         </Form>
       </div>
       <div className="d-flex justify-content-end">
-        <Button type="submit" form="app-config">
-          儲存
-        </Button>
+        {/* 社課 #9：靠右排版，提交按鈕 */}
       </div>
     </>
   )

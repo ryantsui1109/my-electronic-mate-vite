@@ -14,22 +14,23 @@ function MateApp() {
   const [showThinking, setShowThinking] = useState(false)
   const [showResponse, setShowResponse] = useState(false)
   const [showDragHandle, setShowDragHandle] = useState(false)
-  const [aiResponse, setAiResponse] = useState('')
+  // 社課 #4：建立AI回覆state
   const inputRef = useRef(null)
   const timerRef = useRef(null)
 
   const showDialog = isHovered || isFocused
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     function handleResult(res) {
-      setShowThinking(true)
-      setAiResponse((prev) => prev + res)
+      // 社課 #6：接收到AI回覆時的行爲
     }
 
     function handleDialogueEnd() {
       setShowThinking(false)
 
       setTimeout(() => {
+        // eslint-disable-next-line no-undef
         setAiResponse('')
         setShowResponse(false)
       }, 6000)
@@ -52,14 +53,13 @@ function MateApp() {
   }
 
   function handleSubmit(e) {
+    // 社課 #5：提交行爲
+
+    // 底下不用自己寫
     setShowResponse(true)
     setShowThinking(true)
-    e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    window.dialogue.send(fd.get('prompt'))
-    inputRef.current.value = ''
+    e.currentTarget.reset()
     inputRef.current.blur()
-    setIsFocused(false)
   }
 
   return (
@@ -98,7 +98,7 @@ function MateApp() {
               />
             )}
 
-            {aiResponse}
+            {/* 社課 #4：建立AI回覆state，並填在這裏 */}
           </div>
         )}
         <div
