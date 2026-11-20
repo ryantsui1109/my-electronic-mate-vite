@@ -190,7 +190,7 @@ const startMate = ({ winMate }) => {
   winMate.setAlwaysOnTop(true, 'screen-saver')
 }
 
-const tray = null
+let tray = null
 
 app.whenReady().then(() => {
   const primaryDisplay = screen.getPrimaryDisplay()

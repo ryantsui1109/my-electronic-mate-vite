@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import cn from 'classnames'
 function WinCtrlBar() {
   return (
     <>
@@ -24,7 +24,7 @@ function WinCtrlBar() {
         >
           <i className="bi bi-dash-lg" />
         </button>
-        <div className={classNames('m-1', 'flex-fill', 'd-flex', 'align-items-center')}>
+        <div className={cn('m-1', 'flex-fill', 'd-flex', 'align-items-center')}>
           <p className="ms-1 mb-0">My Electronic Mate</p>
         </div>
       </div>
