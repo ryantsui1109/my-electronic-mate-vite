@@ -35,7 +35,13 @@ ipcMain.on('close-window', (e) => {
   const win = BrowserWindow.fromWebContents(webContent)
   win.close()
 })
-// 社課 #8：視窗控制
+
+ipcMain.on('maximize-window', (e) => {
+  const webContent = e.sender
+  const win = BrowserWindow.fromWebContents(webContent)
+  // 社課 #8：視窗控制
+})
+
 ipcMain.on('minimize-window', (e) => {
   const webContent = e.sender
   const win = BrowserWindow.fromWebContents(webContent)

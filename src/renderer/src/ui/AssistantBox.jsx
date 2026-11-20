@@ -5,7 +5,15 @@ import { PropTypes } from 'prop-types'
 
 // 社課 #11：AssistantBox.jsx
 function AssistantBox({ message }) {
-  return <></>
+  return (
+    <>
+      <Container className="d-flex mb-3">
+        <Toast className="shadow-none">
+          <Toast.Body>{message}</Toast.Body>
+        </Toast>
+      </Container>
+    </>
+  )
 }
 
 AssistantBox.propTypes = {
