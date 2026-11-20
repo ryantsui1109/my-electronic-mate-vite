@@ -200,6 +200,8 @@ app.whenReady().then(() => {
   // eslint-disable-next-line no-unused-vars
   const contextMenu = Menu.buildFromTemplate(menu)
 
+  const trayIcon = nativeImage.createFromPath(takatoIconPath).resize({ width: 16, height: 16 })
+  
   // 社課 #1：構建托盤
 
   if (process.platform === 'darwin') {
