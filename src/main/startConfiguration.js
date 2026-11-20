@@ -1,6 +1,7 @@
-import { BrowserWindow, is } from 'electron'
+import { BrowserWindow } from 'electron'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
+import { is } from '@electron-toolkit/utils'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

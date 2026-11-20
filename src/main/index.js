@@ -1,15 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {
-  app,
-  BrowserWindow,
-  ipcMain,
-  screen,
-  Tray,
-  Menu,
-  nativeImage,
-  safeStorage,
-  is
-} from 'electron'
+import { app, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage, safeStorage } from 'electron'
 import * as path from 'path'
 import { fileURLToPath } from 'node:url'
 import Store from 'electron-store'
@@ -18,6 +8,7 @@ import OpenAI from 'openai'
 import createPrompt from './prompt.js'
 // eslint-disable-next-line no-unused-vars
 import takatoIconPath from './assets/saijo_takato_head.png?asset'
+import {is} from "@electron-toolkit/utils"
 
 const configStore = new Store({
   defaults: {
