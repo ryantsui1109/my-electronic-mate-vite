@@ -2,7 +2,7 @@ import cn from 'classnames'
 function WinCtrlBar() {
   return (
     <>
-      <div id="winCtrl-bar" className={classNames('d-flex', 'flex-row-reverse')}>
+      <div id="winCtrl-bar" className={cn('d-flex', 'flex-row-reverse')}>
         <button
           id="close-btn"
           className="winCtrl-btn border-0"
