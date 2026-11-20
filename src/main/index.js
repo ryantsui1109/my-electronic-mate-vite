@@ -185,7 +185,7 @@ ipcMain.handle('send-dialogue', async (e, prompt) => {
 })
 
 const startMate = ({ winMate }) => {
-  winMate.webContents.openDevTools({ mode: 'detach' })
+  // winMate.webContents.openDevTools({ mode: 'detach' })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     winMate.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/mate-index.html`)
