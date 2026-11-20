@@ -1,5 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import { app, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage, safeStorage } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  screen,
+  Tray,
+  Menu,
+  nativeImage,
+  safeStorage,
+  is
+} from 'electron'
 import * as path from 'path'
 import { fileURLToPath } from 'node:url'
 import Store from 'electron-store'
@@ -186,7 +196,11 @@ ipcMain.handle('send-dialogue', async (e, prompt) => {
 const startMate = ({ winMate }) => {
   winMate.webContents.openDevTools({ mode: 'detach' })
 
-  winMate.loadFile(path.join(__dirname, '..', 'renderer', 'mate-index.html'))
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    winMate.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/mate-index.html`)
+  } else {
+    winMate.loadFile(path.join(__dirname, '..', 'renderer', 'mate-index.html'))
+  }
   winMate.setAlwaysOnTop(true, 'screen-saver')
 }
 
@@ -201,7 +215,7 @@ app.whenReady().then(() => {
   const contextMenu = Menu.buildFromTemplate(menu)
 
   const trayIcon = nativeImage.createFromPath(takatoIconPath).resize({ width: 16, height: 16 })
-  
+
   // 社課 #1：構建托盤
 
   if (process.platform === 'darwin') {

@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, is } from 'electron'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -14,7 +14,11 @@ function startConfiguration() {
       preload: path.join(__dirname, '..', 'preload', 'index.js')
     }
   })
-  win.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'))
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    win.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/index.html`)
+  } else {
+    win.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'))
+  }
 }
 
 export default startConfiguration
